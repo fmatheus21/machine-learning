@@ -1,0 +1,25 @@
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.swp
+
+# Ambiente Virtual
+venv/
+.env
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+
+# Distribuição
+build/
+dist/
+*.egg-info/
+
+# Arquivos de Log
+*.log
+
+# Arquivos de Configuração do IDE
+.idea/
+.vscode/
