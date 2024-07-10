@@ -6,12 +6,13 @@ import plotly.express as px
 from sklearn.preprocessing import StandardScaler
 
 
-def init():
+def standardisation():
 	id_cliente = 'Id_Cliente'
 	renda = 'income'
 	idade = 'age'
 	emprestimo = 'loan'
 	pagamento = 'default'
+	separador = '-------------------------------'
 
 	base_credit = pd.read_csv('data/credit_data.csv')
 	# base_credit = data.rename(columns=novos_cabecalhos, inplace=True)
@@ -47,11 +48,25 @@ def init():
 
 	print(base_credit)
 
+	print(separador)
+
 	# Saber se o cliente vai pagar o emprestimo
 	# x = Classes previsoras
 	# y = Variavel de classe
 	x_credit = base_credit.iloc[:, 1:4].values
 	y_credit = base_credit.iloc[:, 4].values
+
+	'''	
+	Normalizacao (Normalization)
+	x = (x - minimo(x)) / (maximo(x) - minimo(x))
+	'''
+
+	'''
+	Padronizacao (Standardisation)
+	x = (x - media(x))/desvio padrao(x)
+	'''
+	scaler_credit = StandardScaler()
+	x_credit = scaler_credit.fit_transform(x_credit)
 
 	menor_renda = x_credit[:, 0].min()
 	maior_renda = x_credit[:, 0].max()
@@ -67,13 +82,18 @@ def init():
 	print(f'Menor Renda: {menor_renda} | Menor Idade: {menor_idade} | Menor Emprestimo: {menor_emprestimo}')
 	print(f'Maior Renda: {maior_renda} | Maior Idade: {maior_idade} | Maior Emprestimo: {maior_emprestimo}')
 
-	'''
-	Padronizacao (Standardisation)
-	x = (x - media(x))/desvio padrao(x)
-	
-	Normalizacao (Normalization)
-	x = (x - minimo(x)) / (maximo(x) - minimo(x))
-	'''
+
+def test():
+	base_census = pd.read_csv('data/census.csv')
+
+	print(base_census)
+	print(base_census.describe())
+	print(base_census.isnull().sum())
+
+
+def init():
+	# standardisation()
+	test()
 
 
 if __name__ == '__main__':
